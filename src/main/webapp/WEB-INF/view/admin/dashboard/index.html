@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Demo Thymeleaf</title>
+        <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css" />
+        <link rel="stylesheet" th:href="@{/css/main.css}" />
+    </head>
+    <body class="bg-gray-100">
+        <div th:replace="admin/layout/navbar :: navbar">...</div>
+
+        <div th:replace="admin/layout/sidebar :: sidebar">...</div>
+    </body>
+    <script th:src="@{/js/script.js}"></script>
+</html>
