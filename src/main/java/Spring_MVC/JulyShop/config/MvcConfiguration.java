@@ -49,7 +49,10 @@ public class MvcConfiguration implements WebMvcConfigurer {
         // CSS resources
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
         registry.addResourceHandler("/logo/**").addResourceLocations("/resources/logo/");
-        registry.addResourceHandler("/avatar/**").addResourceLocations("/resources/img/avatar/");
+        registry.addResourceHandler("/avatar/**").addResourceLocations("/resources/img/admin/avatar");
+        // registry.addResourceHandler("/avatar/**").addResourceLocations("/resources/img/user/avatar");
+        registry.addResourceHandler("/section/**").addResourceLocations("/resources/img/admin/section");
+
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
 
     }

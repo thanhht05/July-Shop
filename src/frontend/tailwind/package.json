@@ -4,7 +4,7 @@
     "tailwindcss": "^4.1.7"
   },
   "scripts": {
-    "dev":   "tailwindcss -i src/frontend/tailwind/src/input.css -o src/main/webapp/resources/css/main.css --watch"
+    "dev":   "npx @tailwindcss/cli -i src/frontend/tailwind/src/input.css -o src/main/webapp/resources/css/main.css --watch"
   }
 
 }
