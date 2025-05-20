@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import Spring_MVC.JulyShop.doamin.User;
+import Spring_MVC.JulyShop.service.UploadService;
 import Spring_MVC.JulyShop.service.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final UploadService uploadService;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder, UploadService uploadService) {
         this.userService = userService;
+        this.uploadService = uploadService;
         this.passwordEncoder = passwordEncoder;
 
     }
@@ -33,8 +37,15 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String handleCreateUser(@ModelAttribute("newUser") User user) {
+    public String handleCreateUser(@ModelAttribute("newUser") User user,
+            @RequestParam("avatarFile") MultipartFile file) {
 
+        try {
+            String avatar = this.uploadService.handleUploadFile(file, "avatar");
+            user.setAvatar(avatar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String passwordHash = passwordEncoder.encode(user.getPassword());
         user.setPassword(passwordHash);
         this.userService.handleSaveUser(user);

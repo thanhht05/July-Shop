@@ -16,84 +16,84 @@
     <!-- end navbar   -->
 
     <!-- start wrapper  -->
-    <div class="h-screen flex flex-row flex-wrap">
+    <div class="h-screen flex flex-row flex-nowrap">
         <div th:replace="admin/layout/sidebar :: sidebar">...</div>
 
-        <div class=" mt-5 absolute right-[17rem]">
-            <button class="btn">
-                <a class="inline-block w-full h-full" href="/admin/user/create">Create User</a>
-            </button>
-        </div>
+
 
         <!-- start table  -->
-        <div class="max-h-[35rem] overflow-y-auto overflow-x-hidden m-8 shadow mt-20">
-            <div class="w-[60rem] flex flex-col">
-                <div class="-m-1.5 overflow-x-auto">
-                    <div class="p-1.5 min-w-full inline-block align-middle">
-                        <div class="overflow-hidden">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">ID
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
-                                            Full name
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
-                                            Address
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
-                                            Phone
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-end  font-bold text-gray-500 uppercase">
-                                            Action
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200">
+        
+        <div class=" bg-slate-100 flex-1 mt-[6rem] md:mt-0 " style="max-height: 40rem;">
+            <div class="p-1.5 min-w-full inline-block align-middle">
+                <div class="inline-block float-right m-2 font-bold ">
+                    <button class="btn">
+                        <a class="inline-block w-full h-full" href="/admin/user/create">Create User</a>
+                    </button>
+                </div>
+                <div class="">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
+                                    ID
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
+                                    Full name
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
+                                    Address
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
+                                    Phone
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-end  font-bold text-gray-500 uppercase">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
 
-                                    <tr th:if="${users.empty}">
-                                        <td class="text-lg" colspan="2"> No Users Available </td>
-                                    </tr>
-                                    <tr th:each="user : ${users}">
-                                        <td class="px-6 py-4 whitespace-nowrap  font-medium text-gray-800" th:text="${user.id}"></td>
-                                        <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.fullName}"></td>
-                                        <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.address}"></td>
-                                        <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.phone}"></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end  font-medium">
-                                            <button type="button"
-                                                class=" cursor-pointer p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-green-500 text-white">
-                                                
-                                                <a href="">Update</a>
-                                            </button>
-                                            <button type="button"
-                                                class=" cursor-pointer  p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-yellow-500 text-white">
-                                                <a href="">Detail</a>
-                                            </button>
-                                            <button type="button"
-                                                class=" cursor-pointer p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-red-500 text-white">
-                                                <a href="">Delete</a>
-                                            </button>
-                                        </td>
-                                    </tr>
+                            <tr th:if="${users.empty}">
+                                <td class="text-lg" colspan="2"> No Users Available </td>
+                            </tr>
+                            <tr th:each="user : ${users}">
+                                <td class="px-6 py-4 whitespace-nowrap  font-medium text-gray-800" th:text="${user.id}">
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.fullName}"></td>
+                                <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.address}"></td>
+                                <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.phone}">
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-end  font-medium">
+                                    <button type="button"
+                                        class=" cursor-pointer p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-green-500 text-white">
 
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                        <a href="">Update</a>
+                                    </button>
+                                    <button type="button"
+                                        class=" cursor-pointer  p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-yellow-500 text-white">
+                                        <a href="">Detail</a>
+                                    </button>
+                                    <button type="button"
+                                        class=" cursor-pointer p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-red-500 text-white">
+                                        <a href="">Delete</a>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
+
+
         <!-- end table  -->
     </div>
     <!-- end wrapper  -->
+
 </body>
+<script th:src="@{/js/script.js}"></script>
 
 </html>
