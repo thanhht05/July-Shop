@@ -10,8 +10,6 @@ p {
     letter-spacing: 0.05em;
     font-size: 0.875rem;
     --text-opacity: 1;
-    color: #a0aec0;
-    color: rgba(160, 174, 192, var(--text-opacity));
 }
 
 .h1 {

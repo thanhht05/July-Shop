@@ -20,77 +20,117 @@
         <div th:replace="admin/layout/sidebar :: sidebar">...</div>
 
 
+        <div class="flex-1">
+            <!-- start table  -->
+            <div class=" bg-slate-100 flex-1 mt-[6rem] md:mt-0 " style="max-height: 40rem;">
+                <div class="p-1.5 min-w-full inline-block align-middle">
+                    <div class="inline-block float-right m-2 font-bold ">
+                        <button class="btn">
+                            <a class="inline-block w-full h-full" href="/admin/user/create">Create User</a>
+                        </button>
+                    </div>
+                    <div class="">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
+                                        ID
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
+                                        Full name
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
+                                        Address
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
+                                        Phone
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-end  font-bold text-gray-500 uppercase">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
 
-        <!-- start table  -->
-        
-        <div class=" bg-slate-100 flex-1 mt-[6rem] md:mt-0 " style="max-height: 40rem;">
-            <div class="p-1.5 min-w-full inline-block align-middle">
-                <div class="inline-block float-right m-2 font-bold ">
-                    <button class="btn">
-                        <a class="inline-block w-full h-full" href="/admin/user/create">Create User</a>
-                    </button>
-                </div>
-                <div class="">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
-                                    ID
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
-                                    Full name
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
-                                    Address
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
-                                    Phone
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-end  font-bold text-gray-500 uppercase">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-200">
+                                <tr th:if="${users.empty}">
+                                    <td class="text-lg" colspan="2"> No Users Available </td>
+                                </tr>
+                                <tr th:each="user : ${users}">
+                                    <td class="px-6 py-4 whitespace-nowrap  font-medium text-gray-800"
+                                        th:text="${user.id}">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.fullName}">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.address}">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.phone}">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-end  font-medium">
+                                        <button type="button"
+                                            class=" cursor-pointer p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-green-500 text-white">
 
-                            <tr th:if="${users.empty}">
-                                <td class="text-lg" colspan="2"> No Users Available </td>
-                            </tr>
-                            <tr th:each="user : ${users}">
-                                <td class="px-6 py-4 whitespace-nowrap  font-medium text-gray-800" th:text="${user.id}">
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.fullName}"></td>
-                                <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.address}"></td>
-                                <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.phone}">
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-end  font-medium">
-                                    <button type="button"
-                                        class=" cursor-pointer p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-green-500 text-white">
+                                            <a href="">Update</a>
+                                        </button>
+                                        <button type="button"
+                                            class=" cursor-pointer  p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-yellow-500 text-white">
+                                            <a th:href="@{'/admin/user/' + ${user.id}}">Detail</a>
+                                        </button>   
+                                        <button type="button"
+                                            class=" cursor-pointer p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-red-500 text-white">
+                                            <a th:href="@{'/admin/user/delete/' + ${user.id}}">Delete</a>
+                                        </button>
+                                    </td>
+                                </tr>
 
-                                        <a href="">Update</a>
-                                    </button>
-                                    <button type="button"
-                                        class=" cursor-pointer  p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-yellow-500 text-white">
-                                        <a href="">Detail</a>
-                                    </button>
-                                    <button type="button"
-                                        class=" cursor-pointer p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-red-500 text-white">
-                                        <a href="">Delete</a>
-                                    </button>
-                                </td>
-                            </tr>
-
-                            </tr>
-                        </tbody>
-                    </table>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <!-- end table  -->
+
+
+            <!-- start pagination  -->
+            <nav class="mt-4 text-center" aria-label="Page navigation example">
+                <ul class="inline-flex -space-x-px text-base h-10">
+                    <li>
+                        <a href="#"
+                            class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                    </li>
+                    <li>
+                        <a href="#" aria-current="page"
+                            class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- end pagination  -->
         </div>
 
 
 
-        <!-- end table  -->
     </div>
+
     <!-- end wrapper  -->
 
 </body>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title th:text=" 'User ' + ${user.id}"></title>
+
+        <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css" />
+        <link rel="stylesheet" th:href="@{/css/custom.css}" />
+        <link rel="stylesheet" th:href="@{/css/main.css}" />
+    </head>
+    <body>
+        <div th:replace="admin/layout/navbar :: navbar">...</div>
+        <!-- end navbar   -->
+
+        <!-- start wrapper  -->
+        <div class="h-screen flex flex-row flex-wrap">
+            <!-- start-sidebar  -->
+            <div th:replace="admin/layout/sidebar :: sidebar">...</div>
+            <!-- end-sidebar  -->
+
+            <div>
+                <!-- start breadcrumb  -->
+                <ol class="md:p-4 items-center whitespace-nowrap h-10 hidden md:flex">
+                    <li class="inline-flex items-center">
+                        <a
+                            class="flex items-center text-md hover:text-blue-600 focus:outline-hidden focus:text-blue-600 dark:hover:text-blue-500 dark:focus:text-blue-500"
+                            href="/admin"
+                        >
+                            Home
+                        </a>
+                        <svg
+                            class="shrink-0 size-5 text-gray-400 mx-2"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                        >
+                            <path d="M6 13L10 3" stroke="currentColor" stroke-linecap="round"></path>
+                        </svg>
+                    </li>
+                    <li class="inline-flex items-center">
+                        <a
+                            class="flex items-center text-md hover:text-blue-600 focus:outline-hidden focus:text-blue-600 dark:hover:text-blue-500 dark:focus:text-blue-500"
+                            href="/admin/user"
+                        >
+                            User
+                            <svg
+                                class="shrink-0 size-5 text-gray-400 mx-2"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <path d="M6 13L10 3" stroke="currentColor" stroke-linecap="round"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="inline-flex items-center text-sm font-semibold text-blue-500 truncate" aria-current="page">User detail</li>
+                </ol>
+                <!-- end breadcrumb  -->
+
+                <div
+                    class="flex-1 md:flex-none ml-10 md-ml-0 mt-28 md:mt-0 max-w-lg max-h-[30rem] border border-gray-200 rounded-lg shadow-sm bg-zinc-50"
+                >
+                    <div class="p-5">
+                        <div class="text-center">
+                            <img class="w-[200px]" th:src=" '/avatar/'+ ${user.avatar}" alt="User Avatar" />
+                        </div>
+                        <div class="pt-3">
+                            <p style="font-size: 1rem" class="text-black"><b>Email:</b> <span th:text="${user.email}"></span></p>
+                            <p style="font-size: 1rem" class="text-black"><b>Name:</b> <span th:text="${user.fullName}"></span></p>
+                            <p style="font-size: 1rem" class="text-black"><b>Address:</b> <span th:text="${user.address}"></span></p>
+                            <p style="font-size: 1rem" class="text-black"><b>Phone:</b> <span th:text="${user.phone}"></span></p>
+                            <!-- <p class="text-black text-lg"><b>Role:</b> <span th:text="${user.role}"></span></p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script th:src="@{/js/script.js}"></script>
+</html>

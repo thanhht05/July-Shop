@@ -2,6 +2,7 @@ package Spring_MVC.JulyShop.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,20 @@ public class UserService {
     public List<User> handleGetAllUser() {
         List<User> users = this.userRepository.findAll();
         return users;
+    }
+
+    public User getUserById(Long id) {
+        Optional<User> user = this.userRepository.findById(id);
+        if (user.isPresent()) {
+            User userReal = user.get();
+            return userReal;
+        }
+
+        return null;
+    }
+
+    public void deleteUserById(Long id) {
+        this.userRepository.deleteById(id);
     }
 
 }
