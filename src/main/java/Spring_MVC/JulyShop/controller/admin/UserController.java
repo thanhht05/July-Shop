@@ -48,7 +48,9 @@ public class UserController {
             e.printStackTrace();
         }
         String passwordHash = passwordEncoder.encode(user.getPassword());
+        String roleName = user.getRole().getName();
         user.setPassword(passwordHash);
+        user.setRole(this.userService.findRoleByName(roleName));
         this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
@@ -80,6 +82,26 @@ public class UserController {
     @PostMapping("/admin/user/delete")
     public String handleDeleteUser(@ModelAttribute User user) {
         userService.deleteUserById(user.getId());
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/admin/user/update/{id}")
+    public String getUpdateUserPage(Model model, @PathVariable Long id) {
+        User user = this.userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String handleUpdateUser(@ModelAttribute User user) {
+        User userUpdate = this.userService.getUserById(user.getId());
+        if (userUpdate != null) {
+            userUpdate.setAddress(user.getAddress());
+            userUpdate.setFullName(user.getFullName());
+            userUpdate.setPhone(user.getPhone());
+
+            this.userService.handleSaveUser(userUpdate);
+        }
         return "redirect:/admin/user";
     }
 

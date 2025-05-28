@@ -6,15 +6,19 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import Spring_MVC.JulyShop.doamin.Role;
 import Spring_MVC.JulyShop.doamin.User;
+import Spring_MVC.JulyShop.repository.RoleRepository;
 import Spring_MVC.JulyShop.repository.UserRepository;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final RoleRepository repository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository repository) {
         this.userRepository = userRepository;
+        this.repository = repository;
     }
 
     public void handleSaveUser(User user) {
@@ -38,6 +42,12 @@ public class UserService {
 
     public void deleteUserById(Long id) {
         this.userRepository.deleteById(id);
+    }
+
+    public Role findRoleByName(String roleName) {
+        Role role = this.repository.findByName(roleName);
+
+        return role;
     }
 
 }
