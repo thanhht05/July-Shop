@@ -1,7 +1,12 @@
 package Spring_MVC.JulyShop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,9 +61,25 @@ public class UserController {
     }
 
     @GetMapping("/admin/user")
-    public String getUserPage(Model model) {
-        List<User> users = this.userService.handleGetAllUser();
-        model.addAttribute("users", users);
+    public String getUserPage(Model model, @RequestParam("pages") Optional<String> page) {
+        int pageNumber = 0; // Default to page 0 (the first page)
+
+        if (page.isPresent()) {
+            try {
+                pageNumber = Integer.parseInt(page.get()) - 1;
+                if (pageNumber < 0)
+                    pageNumber = 0;
+            } catch (NumberFormatException e) {
+                pageNumber = 0;
+            }
+        }
+
+        Pageable pageable = PageRequest.of(pageNumber, 3);
+        Page<User> userPage = this.userService.handleGetAllUser(pageable);
+
+        model.addAttribute("users", userPage.getContent());
+        model.addAttribute("currentPage", userPage.getNumber() + 1);
+        model.addAttribute("totalPages", userPage.getTotalPages());
 
         return "admin/user/show";
     }

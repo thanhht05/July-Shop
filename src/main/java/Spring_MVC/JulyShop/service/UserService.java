@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import Spring_MVC.JulyShop.doamin.Role;
@@ -25,8 +27,8 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-    public List<User> handleGetAllUser() {
-        List<User> users = this.userRepository.findAll();
+    public Page<User> handleGetAllUser(Pageable pageable) {
+        Page<User> users = this.userRepository.findAll(pageable);
         return users;
     }
 
