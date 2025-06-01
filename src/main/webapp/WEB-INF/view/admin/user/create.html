@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css" />
     <link rel="stylesheet" th:href="@{/css/custom.css}" />
     <link rel="stylesheet" th:href="@{/css/main.css}" />
+
     <script>
         // preview avatar 
 
@@ -47,7 +48,7 @@
         <!-- end-sidebar  -->
 
 
-    
+
         <div class="flex-1">
             <!-- start breadcrumb  -->
             <ol class=" md:p-4 items-center whitespace-nowrap h-10 hidden md:flex">
@@ -77,12 +78,12 @@
             </ol>
             <!-- end breadcrumb  -->
             <div class=" p-6">
-            <!-- start form  -->
+                <!-- start form  -->
                 <form action="#" th:action="@{/admin/user/create}" th:object="${user}" method="post"
                     enctype="multipart/form-data"
                     class=" mx-auto mt-20 md:mt-0 lg:w-[38rem] max-w-2xl bg-white rounded-2xl shadow-lg p-8 space-y-6">
                     <!-- Lưới 2 cột trên md, 1 cột trên mobile -->
-
+                    <p> </p>
                     <!-- First name -->
                     <div class="flex flex-col">
                         <label for="fullName" class="mb-1 font-medium text-gray-700">
@@ -90,6 +91,10 @@
                         </label>
                         <input id="fullName" type="text" th:field="*{fullName}"
                             class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
+                        <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"
+                            th:classappend="${#fields.hasErrors('fullName')} ? 'text-red-600': ''">
+                        </p>
+
                     </div>
 
                     <!-- Email – chiếm full width -->
@@ -100,6 +105,12 @@
                         <input id="email" type="email" th:field="*{email}"
                             class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2"
                             placeholder="you@example.com" />
+                        <!-- <p th:if="${#fields.hasErrors('email')}" th:class="${#fields.hasErrors('email')}? error">
+                            Email can not empty</p> -->
+                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                            th:classappend="${#fields.hasErrors('email')} ? 'text-red-600': ''">
+                        </p>
+
                     </div>
                     <div class="flex flex-col">
                         <label for="password" class="mb-1 font-medium text-gray-700">
@@ -107,6 +118,9 @@
                         </label>
                         <input id="password" type="password" th:field="*{password}"
                             class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
+                            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                            th:classappend="${#fields.hasErrors('password')} ? 'text-red-600': ''">
+                        </p>
                     </div>
 
                     <!-- address – -->
@@ -133,11 +147,11 @@
                             <label for="role" class="mb-1 font-medium text-gray-700">
                                 Role
                             </label>
-                            <select th:field="${user.role.name}"  id="role"
+                            <select th:field="${user.role.name}" id="role"
                                 class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2">
                                 <option value="ADMIN">ADMIN</option>
                                 <option value="USER">User</option>
-    
+
                             </select>
                         </div>
 
@@ -166,14 +180,14 @@
                 <!-- end form  -->
             </div>
 
-            
+
 
         </div>
 
 
     </div>
 
-    
+
     </div>
     <!-- end wrapper  -->
 </body>

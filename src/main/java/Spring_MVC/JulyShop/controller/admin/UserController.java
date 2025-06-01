@@ -6,10 +6,11 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 import Spring_MVC.JulyShop.doamin.User;
 import Spring_MVC.JulyShop.service.UploadService;
 import Spring_MVC.JulyShop.service.UserService;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
@@ -43,8 +44,15 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String handleCreateUser(@ModelAttribute("newUser") User user,
+    public String handleCreateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
             @RequestParam("avatarFile") MultipartFile file) {
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError err : errors) {
+            System.out.println(err.getField() + "--" + err.getDefaultMessage());
+        }
+        if (bindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
 
         try {
             String avatar = this.uploadService.handleUploadFile(file, "avatar");
@@ -78,7 +86,8 @@ public class UserController {
         Page<User> userPage = this.userService.handleGetAllUser(pageable);
 
         model.addAttribute("users", userPage.getContent());
-        model.addAttribute("currentPage", userPage.getNumber() + 1);
+        int currentPage = userPage.getNumber() + 1;
+        model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", userPage.getTotalPages());
 
         return "admin/user/show";

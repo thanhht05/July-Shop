@@ -1,12 +1,17 @@
 package Spring_MVC.JulyShop.doamin;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -16,8 +21,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "User's name cannot be empty.")
+    @Size(min = 5, max = 250)
     private String fullName;
+    @NotEmpty(message = "User's email cannot be empty.")
     private String email;
+    @NotEmpty(message = "Password's email cannot be empty.")
     private String password;
     private String phone;
     private String address;
@@ -26,6 +35,9 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     // Getters and Setters
     public Long getId() {
