@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css" />
     <link rel="stylesheet" th:href="@{/css/custom.css}" />
     <link rel="stylesheet" th:href="@{/css/main.css}" />
-    <title>Users</title>
+    <title>Products</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
                 <div class="p-1.5 min-w-full inline-block align-middle">
                     <div class="inline-block float-right m-2 font-bold ">
                         <button class="btn">
-                            <a class="inline-block w-full h-full" href="/admin/user/create">Create User</a>
+                            <a class="inline-block w-full h-full" href="/admin/product/create">Create product</a>
                         </button>
                     </div>
                     <div class="">
@@ -38,13 +38,17 @@
                                         ID
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
-                                        Full name
+                                         Name
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
-                                        Address
+                                        Factory
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
-                                        Phone
+                                        Target
+                                    </th>
+                                    
+                                    <th scope="col" class="px-6 py-3 text-start  font-bold text-gray-500 uppercase">
+                                        Price
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-end  font-bold text-gray-500 uppercase">
                                         Action
@@ -53,32 +57,34 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200">
 
-                                <tr th:if="${users.empty}">
-                                    <td class="text-lg" colspan="2"> No Users Available </td>
+                                <tr th:if="${products.empty}">
+                                    <td class="text-lg" colspan="2"> No products Available </td>
                                 </tr>
-                                <tr th:each="user : ${users}">
+                                <tr th:each="product : ${products}">
                                     <td class="px-6 py-4 whitespace-nowrap  font-medium text-gray-800"
-                                        th:text="${user.id}">
+                                        th:text="${product.id}">
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.fullName}">
+                                    <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${product.name}">
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.address}">
+                                    <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${product.factor}">
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${user.phone}">
+                                    <td class="px-6 py-4 whitespace-nowrap  text-gray-800" th:text="${product.target}">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap  text-gray-800"  th:text="${#numbers.formatCurrency(product.price)}">
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-end  font-medium">
                                         <button type="button"
                                             class=" cursor-pointer p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-green-500 text-white">
 
-                                            <a th:href="@{'/admin/user/update/' + ${user.id}}">Update</a>
+                                        <a th:href="@{'/admin/product/update/' + ${product.id}}">Detail</a>
                                         </button>
                                         <button type="button"
                                             class=" cursor-pointer  p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-yellow-500 text-white">
-                                            <a th:href="@{'/admin/user/' + ${user.id}}">Detail</a>
+                                            <a th:href="@{'/admin/product/' + ${product.id}}">Detail</a>
                                         </button>
                                         <button type="button"
                                             class=" cursor-pointer p-2 inline-flex items-center gap-x-2  font-semibold rounded-lg border border-transparent  focus:outline-hidden disabled:opacity-50 bg-red-500 text-white">
-                                            <a th:href="@{'/admin/user/delete/' + ${user.id}}">Delete</a>
+                                            <a th:href="@{'/admin/product/delete/' + ${product.id}}">Delete</a>
                                         </button>
                                     </td>
                                 </tr>
@@ -92,46 +98,9 @@
             <!-- end table  -->
 
 
-
+            
             <!-- start pagination -->
-            <nav class="mt-4 text-center" aria-label="Page navigation example">
-                <ul class="inline-flex -space-x-px text-base h-10">
-
-                    <!-- Previous Button -->
-                    <li>
-                        <a th:href="@{/admin/user(pages=${currentPage - 1})}" th:class="'flex items-center justify-center px-4 h-10 ms-0 leading-tight border border-e-0 rounded-s-lg ' + 
-                          (${currentPage == 1} ? 
-                          'text-gray-400 bg-gray-200 pointer-events-none' : 
-                          'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700')">
-                            Previous
-                        </a>
-                    </li>
-
-                    <!-- Page Numbers -->
-                     <!-- loop from 1 to totalPages -->
-                    <li th:each="i : ${#numbers.sequence(1, totalPages)}"> 
-                    <a th:href="@{/admin/user(pages=${i})}" th:class="'flex items-center justify-center px-4 h-10 leading-tight border border-gray-300 ' + 
-                         (${currentPage} == ${i} ? 
-                         'text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700' : 
-                         'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700')">
-                            <span th:text="${i}">1</span>
-                        </a>
-                    </li>
-
-                    <!-- Next Button -->
-                    <li>
-                        <a th:href="@{/admin/user(pages=${currentPage + 1})}" th:if="${currentPage < totalPages}"
-                            th:class="'flex items-center justify-center px-4 h-10 leading-tight border rounded-e-lg text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700'">
-                            Next
-                        </a>
-                        <a th:if="${currentPage >= totalPages}"
-                            class="flex items-center justify-center px-4 h-10 leading-tight border rounded-e-lg text-gray-400 bg-gray-200 pointer-events-none">
-                            Next
-                        </a>
-                    </li>
-
-                </ul>
-            </nav>
+        
 
 
             <!-- end pagination  -->

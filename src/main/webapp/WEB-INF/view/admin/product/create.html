@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Demo Thymeleaf</title>
+    <title>Create product</title>
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css" />
     <link rel="stylesheet" th:href="@{/css/custom.css}" />
     <link rel="stylesheet" th:href="@{/css/main.css}" />
@@ -15,7 +15,7 @@
 
         function previewImage(event) {
             const input = event.target;
-            const preview = document.getElementById("avatarPreview");
+            const preview = document.getElementById("productPreview");
 
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -65,8 +65,8 @@
                 </li>
                 <li class="inline-flex items-center">
                     <a class="flex items-center text-md  hover:text-blue-600 focus:outline-hidden focus:text-blue-600  dark:hover:text-blue-500 dark:focus:text-blue-500"
-                        href="/admin/user">
-                        User
+                        href="/admin/product">
+                        Product
                         <svg class="shrink-0 size-5 text-gray-400  mx-2" width="16" height="16" viewBox="0 0 16 16"
                             fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M6 13L10 3" stroke="currentColor" stroke-linecap="round"></path>
@@ -74,99 +74,123 @@
                     </a>
                 </li>
                 <li class="inline-flex items-center text-sm font-semibold text-blue-500 truncate" aria-current="page">
-                    Create user
+                    Create product
                 </li>
             </ol>
             <!-- end breadcrumb  -->
             <div class=" p-6">
                 <!-- start form  -->
-                <form action="#" th:action="@{/admin/user/create}" th:object="${user}" method="post"
+                <form action="#" th:action="@{/admin/product/create}" th:object="${product}" method="post"
                     enctype="multipart/form-data"
                     class=" mx-auto mt-20 md:mt-0 lg:w-[38rem] max-w-2xl bg-white rounded-2xl shadow-lg p-8 space-y-6">
                     <!-- Lưới 2 cột trên md, 1 cột trên mobile -->
                     <p> </p>
                     <!-- First name -->
                     <div class="flex flex-col">
-                        <label for="fullName" class="mb-1 font-medium text-gray-700">
-                            Họ và tên
+                        <label for="name" class="mb-1 font-medium text-gray-700">
+                            Tên sản phẩm
                         </label>
-                        <input id="fullName" type="text" th:field="*{fullName}"
+                        <input id="name" type="text" th:field="*{name}"
                             class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
-                        <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"
-                            th:classappend="${#fields.hasErrors('fullName')} ? 'text-red-600': ''">
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                            th:classappend="${#fields.hasErrors('name')} ? 'text-red-600': ''">
                         </p>
 
                     </div>
 
                     <!-- Email – chiếm full width -->
                     <div class="flex flex-col">
-                        <label for="email" class="mb-1 font-medium text-gray-700">
-                            Email
+                        <label for="sold" class="mb-1 font-medium text-gray-700">
+                            Sold
                         </label>
-                        <input id="email" type="email" th:field="*{email}"
-                            class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2"
-                            placeholder="you@example.com" />
+                        <input id="sold" type="number" th:field="*{sold}"
+                            class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
                         <!-- <p th:if="${#fields.hasErrors('email')}" th:class="${#fields.hasErrors('email')}? error">
                             Email can not empty</p> -->
-                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                            th:classappend="${#fields.hasErrors('email')} ? 'text-red-600': ''">
+                        <p th:if="${#fields.hasErrors('sold')}" th:errors="*{sold}"
+                            th:classappend="${#fields.hasErrors('sold')} ? 'text-red-600': ''">
                         </p>
 
                     </div>
-                    <div class="flex flex-col">
-                        <label for="password" class="mb-1 font-medium text-gray-700">
-                            Password
-                        </label>
-                        <input id="password" type="password" th:field="*{password}"
-                            class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
-                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                            th:classappend="${#fields.hasErrors('password')} ? 'text-red-600': ''">
-                        </p>
-                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
 
-                    <!-- address – -->
-                    <div class="flex flex-col">
-                        <label for="address" class="mb-1 font-medium text-gray-700">
-                            Địa chỉ
-                        </label>
-                        <input id="address" type="text" th:field="*{address}"
-                            class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
+                        <div class="flex flex-col">
+                            <label for="shortDesc" class="mb-1 font-medium text-gray-700">
+                                Short desc
+                            </label>
+                            <textarea id="shortDesc" type="text" th:field="*{shortDesc}"
+                                class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
+                                <p th:if="${#fields.hasErrors('shortDesc')}" th:errors="*{shortDesc}"
+                                th:classappend="${#fields.hasErrors('shortDesc')} ? 'text-red-600': ''">
+                            </p>
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="detailDesc" class="mb-1 font-medium text-gray-700">
+                                Detail desc
+                            </label>
+                            <input id="detailDesc" type="text" th:field="*{detailDesc}"
+                                class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
+                                <p th:if="${#fields.hasErrors('detailDesc')}" th:errors="*{detailDesc}"
+                                th:classappend="${#fields.hasErrors('detailDesc')} ? 'text-red-600': ''">
+                            </p>
+                        </div>
                     </div>
+                     <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
+
+                         <div class="flex flex-col">
+                             <label for="price" class="mb-1 font-medium text-gray-700">
+                                 Price
+                             </label>
+                             <input id="price" type="text" th:field="*{price}"
+                                 class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
+                         </div>
+
+                                  <div class="flex flex-col">
+                             <label for="quantity" class="mb-1 font-medium text-gray-700">
+                                 Quantity
+                             </label>
+                             <input id="quantity" type="number" th:field="*{quantity}"
+                                 class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
+                         </div>
+                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
                         <!-- phone -->
                         <div class="flex flex-col">
-                            <label for="phone" class="mb-1 font-medium text-gray-700">
-                                Số điện thoại
+                            <label for="factor" class="mb-1 font-medium text-gray-700">
+                                Factor
                             </label>
-                            <input id="phone" type="tel" th:field="*{phone} "
+                            <input id="phone" type="tel" th:field="*{factor} "
                                 class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" />
                         </div>
 
                         <!-- role  -->
                         <div class="flex flex-col">
-                            <label for="role" class="mb-1 font-medium text-gray-700">
-                                Role
+                            <label for="target" class="mb-1 font-medium text-gray-700">
+                                Target
                             </label>
-                            <select th:field="${user.role.name}" id="role"
+                            <select th:field="*{target}" id="target"
                                 class="rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2">
-                                <option value="ADMIN">ADMIN</option>
-                                <option value="USER">User</option>
+                                <option value="STUDY">Study</option>
+                                <option value="GAMMING">Gamming</option>
+                                <option value="OFFICE">Office</option>
+                                <option value="DESIGN">Design</option>
+                                <option value="PROGRAMMING">Programming</option>
 
                             </select>
                         </div>
 
                         <div class="flex flex-col">
-                            <label class=" mb-1 font-medium text-gray-700" for="avatarInput">Avatar</label>
+                            <label class=" mb-1 font-medium text-gray-700" for="imageInput">Image</label>
                             <input
                                 class=" w-full text-sm text-gray-900 border border-gray-300 cursor-pointer focus:outline-none px-4 py-2 "
-                                aria-describedby="file_input_help" id="avatarInput" type="file" accept="image/*"
-                                name="avatarFile " onchange="previewImage(event)">
+                                aria-describedby="file_input_help" id="imageInput" type="file" accept="image/*"
+                                name="imageFile " onchange="previewImage(event)">
 
                         </div>
                         <!-- show avatar  -->
                         <div class="mt-1 max-w-35">
-                            <img id="avatarPreview" src="#" alt="Image Preview"
+                            <img id="productPreview" src="#" alt="Image Preview"
                                 style="max-width: 200px; display: none;" />
                         </div>
                     </div>

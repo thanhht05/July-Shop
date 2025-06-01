@@ -416,7 +416,3 @@ div.code-toolbar .toolbar button {
 div.code-toolbar .toolbar button:hover {
     background-color: #fff !important;
 }
-
-.error {
-    color: red;
-}

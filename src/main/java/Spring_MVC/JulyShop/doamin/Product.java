@@ -8,6 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "products")
@@ -15,14 +19,21 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Product name cannot be empty.")
+    @Size(min = 5, max = 250)
     private String name;
     private String img;
+    @NotEmpty(message = "shortDesc cannot be empty.")
+
     private String shortDesc;
+    @NotEmpty(message = "detail desc cannot be empty.")
     private String detailDesc;
     private String target;
     private String factor;
     private Double price;
     private int sold;
+    @NotNull
+    @Min(1)
     private int quantity;
 
     @OneToMany(mappedBy = "product")
