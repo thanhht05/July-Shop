@@ -1,5 +1,4 @@
 
-
 // get the close btn
 var alert_button = document.getElementsByClassName("alert-btn-close");
 

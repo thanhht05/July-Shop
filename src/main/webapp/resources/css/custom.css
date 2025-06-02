@@ -6,6 +6,18 @@
     border-style: solid;
     border-color: #e5e7eb;
 }
+input {
+    outline: none;
+    border: none;
+}
+input:focus {
+    outline: none;
+    border: none;
+    color: #000;
+}
+input::placeholder {
+    font-size: 1.2rem;
+}
 p {
     letter-spacing: 0.05em;
     font-size: 0.875rem;

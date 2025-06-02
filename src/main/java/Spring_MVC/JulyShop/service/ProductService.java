@@ -1,6 +1,7 @@
 package Spring_MVC.JulyShop.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,13 @@ public class ProductService {
     public List<Product> getAllProducts() {
         List<Product> products = this.productRepository.findAll();
         return products;
+    }
+
+    public Product getUserById(Long id) {
+        Optional<Product> prdOptional = this.productRepository.findById(id);
+        if (prdOptional.isPresent()) {
+            return prdOptional.get();
+        }
+        return null;
     }
 }

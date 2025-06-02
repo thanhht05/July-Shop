@@ -3,9 +3,89 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css" />
+        <link rel="stylesheet" th:href="@{/css/custom.css}" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" th:href="@{/css/main.css}" />
         <title>Home</title>
+        <style>
+            .dot.active {
+                background: #cb4646;
+            }
+        </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const slides = document.getElementById("slides");
+                const dots = document.querySelectorAll(".dot");
+                const slideImages = slides.querySelectorAll("img"); // ✅ Add this line
+                let index = 0;
+
+                function showSlide(i) {
+                    const slideWidth = slideImages[0].clientWidth;
+                    slides.style.transform = `translateX(-${slideWidth * i}px)`;
+                    dots.forEach((dot) => dot.classList.remove("active"));
+                    if (dots[i]) {
+                        dots[i].classList.add("active");
+                    } else {
+                        console.log("không có dot");
+                    }
+                }
+
+                function nextSlide() {
+                    index = (index + 1) % slideImages.length;
+                    showSlide(index);
+                }
+
+                setInterval(nextSlide, 2000);
+
+                dots.forEach((dot, i) => {
+                    dot.addEventListener("click", () => {
+                        index = i;
+                        showSlide(index);
+                    });
+                });
+
+                window.addEventListener("resize", () => {
+                    showSlide(index); // Re-adjust on screen size change
+                });
+
+                showSlide(index); // Show first slide initially
+            });
+        </script>
     </head>
+
     <body>
-        <h1>Home page</h1>
+        <header class="header p-2 flex items-center">
+            <div class="h-7 w-10">
+                <i style="font-size: 1.5rem" class="fa-solid fa-bars"></i>
+            </div>
+            <div class="flex gap-4 items-center flex-1 bg-slate-200 p-2 rounded-md">
+                <i class="w-5 h-5 mt-1 fa-solid fa-magnifying-glass"></i>
+                <div class="flex-1">
+                    <input class="w-full pt-1 pb-1" type="text" placeholder="Nhập sản phẩm tìm kiếm" />
+                </div>
+            </div>
+        </header>
+
+        <div class="relative overflow-hidden">
+            <div class="slides flex" id="slides">
+                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-1.png" alt="1" />
+                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-2.png" alt="2" />
+                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-3.png" alt="3" />
+                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-4.png" alt="4" />
+            </div>
+            <div class="flex gap-2 items-center absolute bottom-3 left-[50%] transform -translate-x-1/2 -translate-y-1/2 dots" id="dots">
+                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot active"></p>
+                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot"></p>
+                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot"></p>
+                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot"></p>
+            </div>
+        </div>
     </body>
 </html>
