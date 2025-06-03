@@ -18,7 +18,344 @@
             .dot.active {
                 background: #cb4646;
             }
+            .show {
+                translate: 0;
+            }
+            .show-nav-overlay {
+                visibility: visible;
+                opacity: 1;
+            }
         </style>
+    </head>
+
+    <body>
+        <header class="header p-2 flex items-center">
+            <div id="logo" class="h-7 w-10">
+                <i style="font-size: 1.5rem" class="fa-solid fa-bars"></i>
+            </div>
+            <div class="flex gap-4 items-center flex-1 bg-slate-200 p-2 rounded-md">
+                <i class="w-5 h-5 mt-1 fa-solid fa-magnifying-glass"></i>
+                <div class="flex-1">
+                    <input class="w-full pt-1 pb-1" type="text" placeholder="Nhập sản phẩm tìm kiếm" />
+                </div>
+            </div>
+        </header>
+
+        <!-- slider -->
+        <div style="z-index: -1" class="relative overflow-hidden">
+            <div class="slides flex" id="slides">
+                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-1.png" alt="1" />
+                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-2.png" alt="2" />
+                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-3.png" alt="3" />
+                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-4.png" alt="4" />
+            </div>
+            <div class="flex gap-2 items-center absolute bottom-3 left-[50%] transform -translate-x-1/2 -translate-y-1/2 dots" id="dots">
+                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot active"></p>
+                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot"></p>
+                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot"></p>
+                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot"></p>
+            </div>
+        </div>
+
+        <!-- Navbar mobile -->
+        <div id="nav-overlay" class="nav-overlay fixed inset-0 z-0 invisible opacity-0 duration-[0.7s ] bg-black/50"></div>
+        <nav
+            id="navbar"
+            class="navbar absolute top-0 h-screen z-[999] nav bg-white w-[16rem] overflow-auto transform -translate-x-[100%] transition-transform duration-500"
+        >
+            <div id="" class="nav__logo p-2">
+                <img class="w-[9rem] object-cover" src="img/logo/logoHomePage.jpg" alt="" />
+            </div>
+            <div class="separate border border-solid"></div>
+            <ul class="navbar__list">
+                <li class="navbar__item p-2">
+                    <a href="" class="navbar__link flex items-center gap-2">
+                        <svg
+                            data-v-24248e08=""
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                            class=""
+                        >
+                            <title data-v-24248e08="">uniE74C</title>
+                            <path
+                                data-v-24248e08=""
+                                d="M25 16h3v14h-26v-26h14v3l7-7 9 9zM16.469 9l6.531 6.531 6.531-6.531-6.531-6.531zM16 11v5h5zM4 16h10v-10h-10v10zM14 18h-10v10h10v-10zM16 18v10h10v-10h-10z"
+                            ></path>
+                        </svg>
+                        <span>Sản phẩm</span>
+                    </a>
+                </li>
+                <li class="navbar__item p-2">
+                    <a href="" class="navbar__link flex items-center gap-2">
+                        <svg
+                            data-v-24248e08=""
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                            class=""
+                        >
+                            <title data-v-24248e08="">uniE707</title>
+                            <path
+                                data-v-24248e08=""
+                                d="M30 32h-30l6-18h8v-4.094q-0.875-0.188-1.609-0.641t-1.266-1.102-0.828-1.461-0.297-1.703q0-1.031 0.391-1.938t1.070-1.586 1.594-1.078 1.945-0.398 1.938 0.398 1.586 1.078 1.078 1.586 0.398 1.938q0 0.891-0.297 1.703t-0.828 1.461-1.266 1.102-1.609 0.641v4.094h8zM12 5q0 0.625 0.234 1.172t0.641 0.953 0.953 0.641 1.172 0.234 1.172-0.234 0.953-0.641 0.641-0.953 0.234-1.172-0.234-1.172-0.641-0.953-0.953-0.641-1.172-0.234-1.172 0.234-0.953 0.641-0.641 0.953-0.234 1.172zM2.781 30h24.438l-4.656-14h-6.563v7.5q0 0.141-0.117 0.242t-0.281 0.156-0.328 0.078-0.273 0.023-0.273-0.023-0.328-0.078-0.281-0.156-0.117-0.242v-7.5h-6.563z"
+                            ></path>
+                        </svg>
+                        <span>Liên hệ</span>
+                    </a>
+                </li>
+                <li class="navbar__item p-2">
+                    <a href="" class="navbar__link flex items-center gap-2">
+                        <svg
+                            data-v-24248e08=""
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                            class=""
+                        >
+                            <title data-v-24248e08="">uniF0F2</title>
+                            <path
+                                data-v-24248e08=""
+                                d="M0 2h32v22h-20.578l-7.422 7.422v-7.422h-4v-22zM30 22v-18h-28v18h4v4.578l4.578-4.578h19.422zM26 8v2h-20v-2h20zM26 12v2h-20v-2h20zM26 16v2h-20v-2h20z"
+                            ></path>
+                        </svg>
+                        <span>Blog</span>
+                    </a>
+                </li>
+                <li class="navbar__item p-2">
+                    <a href="" class="navbar__link flex items-center gap-2">
+                        <svg
+                            data-v-24248e08=""
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                            class=""
+                        >
+                            <title data-v-24248e08="">uniEBF4</title>
+                            <path
+                                data-v-24248e08=""
+                                d="M32 24h-8.188q-0.156 0.453-0.438 0.82t-0.648 0.625-0.813 0.406-0.914 0.148-0.914-0.148-0.813-0.406-0.648-0.625-0.438-0.82h-8.375q-0.156 0.453-0.438 0.82t-0.648 0.625-0.813 0.406-0.914 0.148-0.914-0.148-0.813-0.406-0.648-0.625-0.438-0.82h-4.188v-18h22v2h5.625l4.375 8.766v7.234zM2 22h2.188q0.156-0.438 0.438-0.813t0.648-0.633 0.813-0.406 0.914-0.148 0.914 0.148 0.813 0.406 0.648 0.633 0.438 0.813h8.375q0.219-0.641 0.695-1.117t1.117-0.695v-12.188h-18v14zM7 24q0.406 0 0.703-0.297t0.297-0.703-0.297-0.703-0.703-0.297-0.703 0.297-0.297 0.703 0.297 0.703 0.703 0.297zM21 24q0.406 0 0.703-0.297t0.297-0.703-0.297-0.703-0.703-0.297-0.703 0.297-0.297 0.703 0.297 0.703 0.703 0.297zM30 17.234l-3.625-7.234h-4.375v10.188q0.641 0.219 1.117 0.695t0.695 1.117h6.188v-4.766z"
+                            ></path>
+                        </svg>
+                        <span>Kiểm tra đơn hàng</span>
+                    </a>
+                </li>
+                <li class="navbar__item p-2">
+                    <a href="" class="navbar__link flex items-center gap-2">
+                        <svg
+                            data-v-24248e08=""
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                            class=""
+                        >
+                            <title data-v-24248e08="">uniE74C</title>
+                            <path
+                                data-v-24248e08=""
+                                d="M25 16h3v14h-26v-26h14v3l7-7 9 9zM16.469 9l6.531 6.531 6.531-6.531-6.531-6.531zM16 11v5h5zM4 16h10v-10h-10v10zM14 18h-10v10h10v-10zM16 18v10h10v-10h-10z"
+                            ></path>
+                        </svg>
+                        <span>Sản phẩm</span>
+                    </a>
+                </li>
+                <li class="navbar__item p-2">
+                    <a href="" class="navbar__link flex items-center gap-2">
+                        <svg
+                            data-v-24248e08=""
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                            class=""
+                        >
+                            <title data-v-24248e08="">uniE74C</title>
+                            <path
+                                data-v-24248e08=""
+                                d="M25 16h3v14h-26v-26h14v3l7-7 9 9zM16.469 9l6.531 6.531 6.531-6.531-6.531-6.531zM16 11v5h5zM4 16h10v-10h-10v10zM14 18h-10v10h10v-10zM16 18v10h10v-10h-10z"
+                            ></path>
+                        </svg>
+                        <span>Điều kiện miễn phí vận chuyển</span>
+                    </a>
+                </li>
+                <li class="navbar__item p-2">
+                    <a href="" class="navbar__link flex items-center gap-2">
+                        <svg
+                            data-v-24248e08=""
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                            class=""
+                        >
+                            <title data-v-24248e08="">uniE94C</title>
+                            <path
+                                data-v-24248e08=""
+                                d="M12 6q0 1.25-0.469 2.336t-1.289 1.906-1.914 1.289-2.328 0.469q-1.25 0-2.336-0.469t-1.906-1.289-1.289-1.906-0.469-2.336q0-1.234 0.469-2.328t1.289-1.914 1.906-1.289 2.336-0.469q1.234 0 2.328 0.469t1.914 1.289 1.289 1.914 0.469 2.328zM6 10q0.828 0 1.555-0.313t1.273-0.859 0.859-1.273 0.313-1.555-0.313-1.555-0.859-1.273-1.273-0.859-1.555-0.313-1.555 0.313-1.273 0.859-0.859 1.273-0.313 1.555 0.313 1.555 0.859 1.273 1.273 0.859 1.555 0.313zM24 18q1.234 0 2.328 0.469t1.914 1.289 1.289 1.914 0.469 2.328q0 1.25-0.469 2.336t-1.289 1.906-1.914 1.289-2.328 0.469q-1.25 0-2.336-0.469t-1.906-1.289-1.289-1.906-0.469-2.336q0-1.234 0.469-2.328t1.289-1.914 1.906-1.289 2.336-0.469zM24 28q0.828 0 1.555-0.313t1.273-0.859 0.859-1.273 0.313-1.555-0.313-1.555-0.859-1.273-1.273-0.859-1.555-0.313-1.555 0.313-1.273 0.859-0.859 1.273-0.313 1.555 0.313 1.555 0.859 1.273 1.273 0.859 1.555 0.313zM23.625 0l-15 30h-2.25l15-30h2.25z"
+                            ></path>
+                        </svg>
+                        <span>Thông tin khuyến mãi</span>
+                    </a>
+                </li>
+                <!-- nav social -->
+                <div class="p-2">
+                    <p style="font-size: 1.1rem" class="font-bold">Kết nối với shop</p>
+                </div>
+                <li class="p-2 flex items-center gap-4">
+                    <svg
+                        data-v-24248e08=""
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="23.184"
+                        height="23.184"
+                        viewBox="0 0 23.184 23.184"
+                        class=""
+                    >
+                        <path
+                            data-v-24248e08=""
+                            id="facebook"
+                            d="M20.062,0H3.126A3.124,3.124,0,0,0,0,3.124V20.06a3.124,3.124,0,0,0,3.124,3.124h8.353l.014-8.285H9.341a.508.508,0,0,1-.508-.506l-.01-2.67a.508.508,0,0,1,.508-.51h2.148V8.633c0-2.994,1.829-4.625,4.5-4.625h2.192a.508.508,0,0,1,.508.508V6.767a.508.508,0,0,1-.508.508H16.826c-1.453,0-1.734.69-1.734,1.7v2.234h3.192a.508.508,0,0,1,.5.568l-.317,2.67a.508.508,0,0,1-.5.448H15.106l-.014,8.285h4.97a3.124,3.124,0,0,0,3.124-3.124V3.124A3.124,3.124,0,0,0,20.062,0Z"
+                            transform="translate(-0.002)"
+                            fill="#475993"
+                        ></path>
+                    </svg>
+                    <span class="">Linh kiện điện tử July shop</span>
+                </li>
+                <li class="p-2 flex items-center gap-4">
+                    <svg
+                        data-v-24248e08=""
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="23.184"
+                        height="16.405"
+                        viewBox="0 0 23.184 16.405"
+                        class=""
+                    >
+                        <path
+                            data-v-24248e08=""
+                            id="youtube"
+                            d="M18.369,67.393H4.815A4.815,4.815,0,0,0,0,72.208v6.776A4.815,4.815,0,0,0,4.815,83.8H18.369a4.815,4.815,0,0,0,4.815-4.815V72.208A4.815,4.815,0,0,0,18.369,67.393Zm-3.256,8.532-6.34,3.024a.254.254,0,0,1-.364-.23V72.483a.254.254,0,0,1,.37-.227l6.34,3.213A.254.254,0,0,1,15.113,75.925Z"
+                            transform="translate(0 -67.393)"
+                            fill="#f61c0d"
+                        ></path>
+                    </svg>
+                    <span class="">Kênh youtube của juLy shop</span>
+                </li>
+                <li class="p-2 flex items-center gap-4">
+                    <svg
+                        data-v-24248e08=""
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="23.184"
+                        height="24.398"
+                        viewBox="0 0 23.184 24.398"
+                        class=""
+                    >
+                        <g data-v-24248e08="" id="iconfinder_facebook_group_3005357" transform="translate(-18.8 -6.7)">
+                            <g data-v-24248e08="" id="Background_Bottom" transform="translate(18.8 7.914)">
+                                <g data-v-24248e08="" id="Group_3" data-name="Group 3">
+                                    <path
+                                        data-v-24248e08=""
+                                        id="Path_14"
+                                        data-name="Path 14"
+                                        d="M41.984,51.653a3.03,3.03,0,0,1-3.031,3.031H21.831A3.03,3.03,0,0,1,18.8,51.653V34.531A3.03,3.03,0,0,1,21.831,31.5H38.953a3.03,3.03,0,0,1,3.031,3.031V51.653Z"
+                                        transform="translate(-18.8 -31.5)"
+                                        fill="#223556"
+                                    ></path>
+                                </g>
+                            </g>
+                            <g data-v-24248e08="" id="Background" transform="translate(18.8 6.7)">
+                                <path
+                                    data-v-24248e08=""
+                                    id="Path_15"
+                                    data-name="Path 15"
+                                    d="M41.984,26.858a3.03,3.03,0,0,1-3.031,3.031H21.831A3.03,3.03,0,0,1,18.8,26.858V9.731A3.03,3.03,0,0,1,21.831,6.7H38.953a3.03,3.03,0,0,1,3.031,3.031V26.858Z"
+                                    transform="translate(-18.8 -6.7)"
+                                    fill="#3b5998"
+                                ></path>
+                            </g>
+                            <g data-v-24248e08="" id="Shadow" transform="translate(20.017 14.02)">
+                                <path
+                                    data-v-24248e08=""
+                                    id="Path_16"
+                                    data-name="Path 16"
+                                    d="M61.874,156.934h0a2.438,2.438,0,0,0-3.516,3.378h0l1.214,1.214a2.437,2.437,0,0,1-.734-.308l-.769-.769h0c-.1.059-.206.117-.308.181l-1.954-1.954a2.436,2.436,0,0,0-3.927.524l-2.174-2.174h0a2.438,2.438,0,1,0-3.589,3.3h0l1.2,1.2a2.449,2.449,0,0,1-.779-.333l-.71-.71v0a4.3,4.3,0,0,0-2.149,4.27h0l7.315,7.315H62.584a3.031,3.031,0,0,0,3.026-2.908h0V160.67Z"
+                                    transform="translate(-43.647 -156.2)"
+                                    fill="#231f20"
+                                    opacity="0.45"
+                                ></path>
+                            </g>
+                            <g data-v-24248e08="" id="Symbol" transform="translate(20.021 14.02)">
+                                <circle
+                                    data-v-24248e08=""
+                                    id="Ellipse_2"
+                                    data-name="Ellipse 2"
+                                    cx="2.438"
+                                    cy="2.438"
+                                    r="2.438"
+                                    transform="translate(7.949 1.709)"
+                                    fill="#fff"
+                                ></circle>
+                                <path
+                                    data-v-24248e08=""
+                                    id="Path_17"
+                                    data-name="Path 17"
+                                    d="M176.289,283.3a4.3,4.3,0,0,0-2.149-4.27,2.434,2.434,0,0,1-4.108-.034,4.308,4.308,0,0,0-2.208,3.119,4.194,4.194,0,0,0-.024,1.185Z"
+                                    transform="translate(-161.695 -272.987)"
+                                    fill="#fff"
+                                ></path>
+                                <path
+                                    data-v-24248e08=""
+                                    id="Path_18"
+                                    data-name="Path 18"
+                                    d="M309.022,242.934a2.434,2.434,0,0,1-4.108-.034,4.308,4.308,0,0,0-1.714,1.689,4.308,4.308,0,0,1,1.959,2.62h6.013A4.308,4.308,0,0,0,309.022,242.934Z"
+                                    transform="translate(-290.496 -238.655)"
+                                    fill="#fff"
+                                ></path>
+                                <circle
+                                    data-v-24248e08=""
+                                    id="Ellipse_3"
+                                    data-name="Ellipse 3"
+                                    cx="2.438"
+                                    cy="2.438"
+                                    r="2.438"
+                                    transform="translate(1.79)"
+                                    fill="#fff"
+                                ></circle>
+                                <path
+                                    data-v-24248e08=""
+                                    id="Path_19"
+                                    data-name="Path 19"
+                                    d="M45.929,242.934a2.434,2.434,0,0,0,4.108-.034,4.308,4.308,0,0,1,1.714,1.689,4.309,4.309,0,0,0-1.959,2.62H43.779A4.308,4.308,0,0,1,45.929,242.934Z"
+                                    transform="translate(-43.747 -238.655)"
+                                    fill="#fff"
+                                ></path>
+                                <circle
+                                    data-v-24248e08=""
+                                    id="Ellipse_4"
+                                    data-name="Ellipse 4"
+                                    cx="2.438"
+                                    cy="2.438"
+                                    r="2.438"
+                                    transform="translate(14.04)"
+                                    fill="#fff"
+                                ></circle>
+                            </g>
+                        </g>
+                    </svg>
+                    <span class="">Linh kiện điện tử July shop</span>
+                </li>
+            </ul>
+        </nav>
+
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const slides = document.getElementById("slides");
@@ -57,35 +394,22 @@
 
                 showSlide(index); // Show first slide initially
             });
+
+            const logo = document.getElementById("logo");
+            const navOverlay = document.getElementById("nav-overlay");
+            const navbar = document.getElementById("navbar");
+
+            // Toggle navbar khi click vào logo
+            logo.addEventListener("click", (e) => {
+                e.stopPropagation();
+                navbar.classList.toggle("show");
+                navOverlay.classList.toggle("show-nav-overlay");
+            });
+            // Ẩn navbar khi click ra ngoài
+            document.addEventListener("click", () => {
+                navbar.classList.remove("show");
+                navOverlay.classList.remove("show-nav-overlay");
+            });
         </script>
-    </head>
-
-    <body>
-        <header class="header p-2 flex items-center">
-            <div class="h-7 w-10">
-                <i style="font-size: 1.5rem" class="fa-solid fa-bars"></i>
-            </div>
-            <div class="flex gap-4 items-center flex-1 bg-slate-200 p-2 rounded-md">
-                <i class="w-5 h-5 mt-1 fa-solid fa-magnifying-glass"></i>
-                <div class="flex-1">
-                    <input class="w-full pt-1 pb-1" type="text" placeholder="Nhập sản phẩm tìm kiếm" />
-                </div>
-            </div>
-        </header>
-
-        <div class="relative overflow-hidden">
-            <div class="slides flex" id="slides">
-                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-1.png" alt="1" />
-                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-2.png" alt="2" />
-                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-3.png" alt="3" />
-                <img class="w-full flex-shrink-0 img-slider" src="/img/slider/slider-4.png" alt="4" />
-            </div>
-            <div class="flex gap-2 items-center absolute bottom-3 left-[50%] transform -translate-x-1/2 -translate-y-1/2 dots" id="dots">
-                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot active"></p>
-                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot"></p>
-                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot"></p>
-                <p class="border-[2px] border-solid border-b-slate-600 rounded w-4 h-4 dot"></p>
-            </div>
-        </div>
     </body>
 </html>
