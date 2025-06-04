@@ -101,6 +101,45 @@
             
             <!-- start pagination -->
         
+            <!-- start pagination -->
+            <nav class="mt-4 text-center" aria-label="Page navigation example">
+                <ul class="inline-flex -space-x-px text-base h-10">
+
+                    <!-- Previous Button -->
+                    <li>
+                        <a th:href="@{/admin/product(pages=${currentPage - 1})}" th:class="'flex items-center justify-center px-4 h-10 ms-0 leading-tight border border-e-0 rounded-s-lg ' + 
+                          (${currentPage == 1} ? 
+                          'text-gray-400 bg-gray-200 pointer-events-none' : 
+                          'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700')">
+                            Previous
+                        </a>
+                    </li>
+
+                    <!-- Page Numbers -->
+                     <!-- loop from 1 to totalPages -->
+                    <li th:each="i : ${#numbers.sequence(1, totalPages)}"> 
+                    <a th:href="@{/admin/product(pages=${i})}" th:class="'flex items-center justify-center px-4 h-10 leading-tight border border-gray-300 ' + 
+                         (${currentPage} == ${i} ? 
+                         'text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700' : 
+                         'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700')">
+                            <span th:text="${i}">1</span>
+                        </a>
+                    </li>
+
+                    <!-- Next Button -->
+                    <li>
+                        <a th:href="@{/admin/product(pages=${currentPage + 1})}" th:if="${currentPage < totalPages}"
+                            th:class="'flex items-center justify-center px-4 h-10 leading-tight border rounded-e-lg text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700'">
+                            Next
+                        </a>
+                        <a th:if="${currentPage >= totalPages}"
+                            class="flex items-center justify-center px-4 h-10 leading-tight border rounded-e-lg text-gray-400 bg-gray-200 pointer-events-none">
+                            Next
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
 
 
             <!-- end pagination  -->

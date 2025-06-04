@@ -6,10 +6,7 @@
     border-style: solid;
     border-color: #e5e7eb;
 }
-input {
-    outline: none;
-    border: none;
-}
+
 input:focus {
     outline: none;
     border: none;

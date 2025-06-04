@@ -1,7 +1,12 @@
 package Spring_MVC.JulyShop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,9 +61,27 @@ public class ProductController {
     }
 
     @GetMapping("/admin/product")
-    public String getProductPage(Model model) {
-        List<Product> products = this.productService.getAllProducts();
-        model.addAttribute("products", products);
+    public String getProductPage(Model model, @RequestParam("pages") Optional<String> page) {
+        int pageNumber = 0;
+        if (page.isPresent()) {
+            try {
+                pageNumber = Integer.parseInt(page.get()) - 1;
+                if (pageNumber < 0) {
+                    pageNumber = 0;
+                }
+
+            } catch (Exception e) {
+                pageNumber = 0;
+                e.printStackTrace();
+            }
+        }
+
+        Pageable pageable = PageRequest.of(pageNumber, 5);
+        Page<Product> products = this.productService.getAllProducts(pageable);
+        model.addAttribute("products", products.getContent());
+        int currentPage = products.getNumber() + 1;
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", products.getTotalPages());
         return "admin/product/show";
     }
 
@@ -68,6 +91,21 @@ public class ProductController {
         Product product = this.productService.getUserById(id);
         model.addAttribute("product", product);
         return "admin/product/update";
+    }
+
+    @GetMapping("/admin/product/delete/{id}")
+    public String getMethodName(Model model, @PathVariable Long id) {
+        Product product = new Product();
+        product.setId(id);
+        model.addAttribute("product", product);
+        return "admin/product/delete";
+    }
+
+    @PostMapping("/admin/product/delete")
+    public String handleDeleteProduct(@ModelAttribute Product product) {
+        this.productService.deleteProductById(product.getId());
+
+        return "redirect:/admin/product";
     }
 
     @PostMapping("/admin/product/update")

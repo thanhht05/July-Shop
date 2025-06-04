@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title th:text=" 'Delete product ' + ${id}"></title>
+
+        <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css" />
+        <link rel="stylesheet" th:href="@{/css/custom.css}" />
+        <link rel="stylesheet" th:href="@{/css/main.css}" />
+    </head>
+
+    <body>
+        <div th:replace="~{admin/layout/navbar :: navbar}"></div>
+
+        <!-- end navbar   -->
+
+        <!-- start wrapper  -->
+        <div class="h-screen flex flex-row flex-wrap">
+            <!-- start-sidebar  -->
+            <div th:replace="~{admin/layout/sidebar :: sidebar}">...</div>
+            <!-- end-sidebar  -->
+
+            <div class="flex-1 md:flex-none lg:w-[40rem] mt-24 md:mt-10">
+                <form
+                    th:action="@{/admin/product/delete}"
+                    th:object="${product}"
+                    method="post"
+                    class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                >
+                    <input th:field="*{id}" type="text" readonly hidden />
+
+                    <div class="mb-4">
+                        <h4 class="text-lg p-5 bg-red-400 rounded-lg" th:text="'Delete product with id ' + ${id}"></h4>
+                    </div>
+
+                    <div class="flex gap-8">
+                        <button
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit"
+                        >
+                            Delete
+                        </button>
+
+                        <a
+                            href="/admin/user"
+                            class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center"
+                        >
+                            Back
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+    <script th:src="@{/js/script.js}"></script>
+</html>

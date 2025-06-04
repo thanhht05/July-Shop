@@ -2,6 +2,7 @@ package Spring_MVC.JulyShop.doamin;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,9 +25,10 @@ public class Product {
     private String name;
     private String img;
     @NotEmpty(message = "shortDesc cannot be empty.")
-
+    @Column(columnDefinition = "MEDIUMTEXT ")
     private String shortDesc;
     @NotEmpty(message = "detail desc cannot be empty.")
+    @Column(columnDefinition = "MEDIUMTEXT ")
     private String detailDesc;
     private String target;
     private String factor;
