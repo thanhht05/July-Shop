@@ -28,6 +28,27 @@
                 visibility: visible;
                 opacity: 1;
             }
+            .navbar__auth:hover .navbar__auth-list {
+                display: block;
+            }
+            .navbar__auth-list {
+                display: none;
+            }
+            .header__auth:hover .header__auth-list {
+                display: block;
+            }
+            .header__auth-list {
+                display: none;
+            }
+            .header__auth-list::before {
+                position: absolute;
+                content: "";
+                display: block;
+                width: 100px;
+                height: 22px;
+                background: transparent;
+                top: -11px;
+            }
         </style>
     </head>
 
@@ -55,9 +76,16 @@
                         <i class="text-[1.5rem] fa-solid fa-cart-shopping"></i>
                         <span class="cursor-pointer">Giỏ hàng</span>
                     </div>
-                    <div>
+                    <div class="relative header__auth">
                         <i class="text-[1.5rem] fa-solid fa-user"></i>
                         <span class="cursor-pointer">Tài khoản</span>
+
+                        <div
+                            class="w-32 h-22 py-4 px-2 shadow-md absolute z-[999] bg-white top-8 -right-2 xl:w-36 xl:left-0 header__auth-list"
+                        >
+                            <a class="block w-full py-1" href="">Đăng nhập</a>
+                            <a class="block w-full py-1" href="">Đăng ký</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -475,6 +503,57 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- start pagination -->
+                    <nav class="mt-4 text-center" aria-label="Page navigation example">
+                        <ul class="inline-flex -space-x-px text-base h-10">
+                            <!-- Previous Button -->
+                            <li>
+                                <a
+                                    th:href="@{/(pages=${currentPage - 1})}"
+                                    th:class="'flex items-center justify-center px-4 h-10 ms-0 leading-tight border border-e-0 rounded-s-lg ' + 
+                          (${currentPage == 1} ? 
+                          'text-gray-400 bg-gray-200 pointer-events-none' : 
+                          'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700')"
+                                >
+                                    Previous
+                                </a>
+                            </li>
+
+                            <!-- Page Numbers -->
+                            <!-- loop from 1 to totalPages -->
+                            <li th:each="i : ${#numbers.sequence(1, totalPages)}">
+                                <a
+                                    th:href="@{/(pages=${i})}"
+                                    th:class="'flex items-center justify-center px-4 h-10 leading-tight border border-gray-300 ' + 
+                         (${currentPage} == ${i} ? 
+                         'text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700' : 
+                         'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700')"
+                                >
+                                    <span th:text="${i}">1</span>
+                                </a>
+                            </li>
+
+                            <!-- Next Button -->
+                            <li>
+                                <a
+                                    th:href="@{/(pages=${currentPage + 1})}"
+                                    th:if="${currentPage < totalPages}"
+                                    th:class="'flex items-center justify-center px-4 h-10 leading-tight border rounded-e-lg text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700'"
+                                >
+                                    Next
+                                </a>
+                                <a
+                                    th:if="${currentPage >= totalPages}"
+                                    class="flex items-center justify-center px-4 h-10 leading-tight border rounded-e-lg text-gray-400 bg-gray-200 pointer-events-none"
+                                >
+                                    Next
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <!-- end pagination  -->
                 </div>
             </div>
 
@@ -489,6 +568,17 @@
                 </div>
                 <div class="separate border border-solid"></div>
                 <ul class="navbar__list">
+                    <li class="p-2 relative navbar__auth md:hidden">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Tài khoản</span>
+
+                            <div class="w-32 h-22 py-4 px-2 shadow-md absolute z-[999] bg-white navbar__auth-list top-7">
+                                <a class="block w-full py-1" href="">Đăng nhập</a>
+                                <a class="block w-full py-1" href="">Đăng ký</a>
+                            </div>
+                        </div>
+                    </li>
                     <li class="navbar__item p-2">
                         <a href="" class="navbar__link flex items-center gap-2">
                             <svg
@@ -1019,14 +1109,17 @@
 
             // Toggle navbar khi click vào logo
             logo.addEventListener("click", (e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // Ngăn sự kiện nổi lên
                 navbar.classList.toggle("show");
                 navOverlay.classList.toggle("show-nav-overlay");
             });
-            // Ẩn navbar khi click ra ngoài
-            document.addEventListener("click", () => {
-                navbar.classList.remove("show");
-                navOverlay.classList.remove("show-nav-overlay");
+
+            // Ẩn navbar khi click ra ngoài (trừ khi click vào logo hoặc navbar)
+            document.addEventListener("click", (e) => {
+                if (!navbar.contains(e.target) && !logo.contains(e.target)) {
+                    navbar.classList.remove("show");
+                    navOverlay.classList.remove("show-nav-overlay");
+                }
             });
         </script>
     </body>

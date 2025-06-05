@@ -1,7 +1,11 @@
 package Spring_MVC.JulyShop.controller.user;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +23,27 @@ public class HomepageControler {
     }
 
     @GetMapping("/")
-    public String getHompage(Model model) {
-        List<Product> products = this.productService.getAllProducts();
-        model.addAttribute("products", products);
+    public String getHompage(Model model, @RequestParam("pages") Optional<String> page) {
+        int pageNumber = 0;
+        if (page.isPresent()) {
+            try {
+                pageNumber = Integer.parseInt(page.get()) - 1;
+                if (pageNumber < 0) {
+                    pageNumber = 0;
+                }
+
+            } catch (Exception e) {
+                pageNumber = 0;
+            }
+
+        }
+
+        Pageable pageable = PageRequest.of(pageNumber, 4);
+        Page<Product> products = this.productService.getAllProducts(pageable);
+        model.addAttribute("products", products.getContent());
+        model.addAttribute("currentPage", products.getNumber() + 1);
+        model.addAttribute("totalPages", products.getTotalPages());
+
         return "client/homepage/index";
     }
 

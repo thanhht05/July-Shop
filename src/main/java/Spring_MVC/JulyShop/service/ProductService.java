@@ -1,5 +1,6 @@
 package Spring_MVC.JulyShop.service;
 
+import java.nio.file.WatchEvent.Kind;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,11 @@ public class ProductService {
 
     public Page<Product> getAllProducts(Pageable pageable) {
         Page<Product> products = this.productRepository.findAll(pageable);
+        return products;
+    }
+
+    public List<Product> getall() {
+        List<Product> products = this.productRepository.findAll();
         return products;
     }
 
