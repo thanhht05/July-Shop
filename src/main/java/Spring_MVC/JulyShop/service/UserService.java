@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import Spring_MVC.JulyShop.doamin.Role;
 import Spring_MVC.JulyShop.doamin.User;
+import Spring_MVC.JulyShop.doamin.dto.RegisterDTO;
 import Spring_MVC.JulyShop.repository.RoleRepository;
 import Spring_MVC.JulyShop.repository.UserRepository;
 
@@ -50,6 +51,14 @@ public class UserService {
         Role role = this.repository.findByName(roleName);
 
         return role;
+    }
+
+    public User registerDTOToUser(RegisterDTO userDTO) {
+        User user = new User();
+        user.setFullName(userDTO.getFirstName() + " " + userDTO.getLastName());
+        user.setPassword(userDTO.getPassword());
+        user.setEmail(userDTO.getEmail());
+        return user;
     }
 
 }
