@@ -1,9 +1,18 @@
 package Spring_MVC.JulyShop.doamin.dto;
 
+import Spring_MVC.JulyShop.service.validator.RegisterChecked;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
+@RegisterChecked
 public class RegisterDTO {
+    @NotEmpty(message = "Email cannot be empty.")
     private String email;
+    @NotEmpty(message = "First name cannot be empty.")
     private String firstName;
+    @NotEmpty(message = "Last name cannot be empty.")
     private String lastName;
+    @NotEmpty(message = "Password cannot be empty.")
     private String password;
     private String confirmPassword;
 

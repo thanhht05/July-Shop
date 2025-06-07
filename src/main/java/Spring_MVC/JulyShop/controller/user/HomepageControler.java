@@ -19,6 +19,7 @@ import Spring_MVC.JulyShop.doamin.User;
 import Spring_MVC.JulyShop.doamin.dto.RegisterDTO;
 import Spring_MVC.JulyShop.service.ProductService;
 import Spring_MVC.JulyShop.service.UserService;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -67,8 +68,11 @@ public class HomepageControler {
     }
 
     @PostMapping("/register")
-    public String handleRegister(@ModelAttribute("userRegister") RegisterDTO userDTO, BindingResult bindingResult) {
-
+    public String handleRegister(@ModelAttribute("userRegister") @Valid RegisterDTO userDTO,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "client/auth/register";
+        }
         User user = this.userService.registerDTOToUser(userDTO);
         String hashPass = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashPass);
