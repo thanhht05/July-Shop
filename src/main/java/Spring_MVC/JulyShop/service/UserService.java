@@ -65,4 +65,8 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
 }

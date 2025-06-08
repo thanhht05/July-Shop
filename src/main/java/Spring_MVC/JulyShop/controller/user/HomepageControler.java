@@ -82,4 +82,10 @@ public class HomepageControler {
         return "redirect:/";
     }
 
+    @GetMapping("/login")
+    public String getLoginPage(Model model) {
+        model.addAttribute("userLogin", new RegisterDTO());
+        return "client/auth/login";
+    }
+
 }
