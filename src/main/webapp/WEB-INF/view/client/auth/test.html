@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Trang chủ</title>
+    </head>
+    <body>
+        <h1>Chào mừng</h1>
+
+        <div sec:authorize="isAuthenticated()">
+            ✅ Đã đăng nhập!<br />
+            Username: <span sec:authentication="name"></span><br />
+            Roles: <span sec:authentication="principal.authorities"></span><br />
+        </div>
+
+        <div sec:authorize="isAnonymous()">Bạn chưa đăng nhập</div>
+    </body>
+</html>
